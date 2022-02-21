@@ -34,6 +34,7 @@ export default function Login() {
   const onSubmitForm = (event) => {
     event.preventDefault();
     dispatch(logInAction(values.email, values.password));
+    setValues(initialFieldValues);
   };
   return (
     <CardWrapper>
