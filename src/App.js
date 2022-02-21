@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { auth } from "./firebase";
 import Login from "./screen/auth/Login";
 import Signup from "./screen/auth/Signup";
 import UpdateUser from "./screen/auth/updateUser";
@@ -57,16 +55,18 @@ const App = () => {
 
       <Router>
         <Home cart={cartItems.length} user={User} />
-          {!User && (
-            <Switch><Route exact={false} path="/login">
-            <Login />
-          </Route>
-        <Route exact={false} path="/signUp">
-          <Signup />
-        </Route></Switch>
-          )}
-              <Switch>
-          <Route exact={false} path="/updateUser" >
+        {!User && (
+          <Switch>
+            <Route exact={false} path="/login">
+              <Login />
+            </Route>
+            <Route exact={false} path="/signUp">
+              <Signup />
+            </Route>
+          </Switch>
+        )}
+        <Switch>
+          <Route exact={false} path="/updateUser">
             <UpdateUser user={User} />
           </Route>
           <Route exact={true} path="/">

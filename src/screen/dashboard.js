@@ -8,7 +8,6 @@ import CardWrapper from "../components/CardWrapper";
 export default function Dashboard(props) {
   const dispatch = useDispatch();
   const isSignIn = useSelector((state) => state.userLogin);
-  const { currentUser } = isSignIn;
   // console.log(currentUser);
   // const { data } = props;
 
@@ -17,7 +16,7 @@ export default function Dashboard(props) {
   let newArray = [];
   useEffect(() => {
     dispatch(dashboardAction());
-  }, []);
+  }, [dispatch]);
   newArray.push(
     data?.map((element) => ({
       ...element,

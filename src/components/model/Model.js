@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationIcon, ShoppingCartIcon } from "@heroicons/react/outline";
 
 const Modal = ({ show, onClose, children }) => {
   const modalRef = useRef(null);

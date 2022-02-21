@@ -12,7 +12,7 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
 } from "../constants/usersAuthConstant";
-import { auth, db } from "../../firebase";
+import { auth } from "../../firebase";
 
 export const signUpAction = (values) => async (dispatch) => {
   try {
