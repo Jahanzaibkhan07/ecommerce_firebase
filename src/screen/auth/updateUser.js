@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { UpdateAction } from "../../redux/actions/userAuthAction";
 import Avatar from "../../assets/Avatar.png";

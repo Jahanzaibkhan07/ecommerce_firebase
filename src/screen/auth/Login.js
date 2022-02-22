@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { logInAction } from "../../redux/actions/userAuthAction";
 import logo from "../../assets/images (2).png";
 import CardWrapper from "../../components/CardWrapper";
 import Modal from "../../components/model/Model";
-import { ExclamationIcon, ShoppingCartIcon } from "@heroicons/react/outline";
+import { ExclamationIcon } from "@heroicons/react/outline";
 import { Dialog } from "@headlessui/react";
 export default function Login() {
   const dispatch = useDispatch();
-  const history = useHistory();
   const isSignIn = useSelector((state) => state.userLogin);
-  const { error, success, loading } = isSignIn;
+  const { error, success, loading, currentUser } = isSignIn;
+  // console.log(isSignIn);
   const initialFieldValues = {
     email: "",
     password: "",
@@ -21,10 +21,10 @@ export default function Login() {
     if (success) {
       // history.push("/");
       setShow(false);
-    } else {
+    } else if (error) {
       setShow(true);
     }
-  }, [success]);
+  }, [success, error]);
   const [values, setValues] = useState(initialFieldValues);
   const [show, setShow] = useState(false);
   const handleInputChange = (e) => {
@@ -34,6 +34,7 @@ export default function Login() {
   const onSubmitForm = (event) => {
     event.preventDefault();
     dispatch(logInAction(values.email, values.password));
+
     setValues(initialFieldValues);
   };
   return (
@@ -71,6 +72,7 @@ export default function Login() {
           </CardWrapper>
         </Modal>
       )}
+
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8 px-10 py-14  bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
           <div>
