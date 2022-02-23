@@ -11,7 +11,7 @@ import { Dialog } from "@headlessui/react";
 export default function Login() {
   const dispatch = useDispatch();
   const isSignIn = useSelector((state) => state.userLogin);
-  const { error, success, loading, currentUser } = isSignIn;
+  const { error, success, loading } = isSignIn;
   // console.log(isSignIn);
   const initialFieldValues = {
     email: "",
@@ -117,7 +117,6 @@ export default function Login() {
             <div>
               <button
                 type="submit"
-                disabled={loading === false ? false : true}
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600"
               >
                 Sign in

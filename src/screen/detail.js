@@ -70,7 +70,7 @@ export default function Detail(props) {
   const cancelButtonRef = useRef(null);
   const location = useLocation();
   const { product } = location.state;
-  const { onAdd, user } = props;
+  const { onAdd, user, sizeName } = props;
 
   const [selectedColor, setSelectedColor] = useState(Data.colors[0]);
   const [selectedSize, setSelectedSize] = useState(Data.sizes[2]);
@@ -80,6 +80,9 @@ export default function Detail(props) {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+  const handleSizeNameClick = (n) => {
+    sizeName(n);
+  };
   //   var array1 = [{ email: "waleed" }, { email: "hanan" }, { email: "zahid" }];
   //   var array2 = [{ email: "waleed" }, { email: "jahanzeb" }, { email: "ali" }];
   //   let newArray = [];
@@ -115,7 +118,10 @@ export default function Detail(props) {
               >
                 <Dialog.Overlay className="absolute inset-0 bg-gray-300 bg-opacity-30 transition-opacity" />
               </Transition.Child>
-              <div className="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+              <div
+                className="fixed inset-y-0 right-0 pl-10 max-w-full flex"
+                onClick={() => setOpen(false)}
+              >
                 <Transition.Child
                   as={Fragment}
                   enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -367,6 +373,7 @@ export default function Detail(props) {
                             key={size.name}
                             value={size}
                             disabled={!size.inStock}
+                            // onClick={() => handleSizeNameClick(size.name)}
                             className={({ active }) =>
                               classNames(
                                 size.inStock
@@ -377,7 +384,7 @@ export default function Detail(props) {
                               )
                             }
                           >
-                            {({ active, checked }) => (
+                            {({ active, checked, onclick }) => (
                               <>
                                 <RadioGroup.Label as="p">
                                   {size.name}
@@ -385,7 +392,13 @@ export default function Detail(props) {
                                 {size.inStock ? (
                                   <div
                                     className={classNames(
-                                      active ? "border" : "border-2",
+                                      active
+                                        ? "border"
+                                          ? (onclick = handleSizeNameClick(
+                                              size.name
+                                            ))
+                                          : null
+                                        : "border-2",
                                       checked
                                         ? "border-indigo-500"
                                         : "border-transparent",
@@ -396,7 +409,7 @@ export default function Detail(props) {
                                 ) : (
                                   <div
                                     aria-hidden="true"
-                                    className="absolute -inset-px rounded-md border-2 border-gray-200 pointer-events-none"
+                                    className="absolute  -inset-px rounded-md border-2 border-gray-200 pointer-events-none"
                                   >
                                     <svg
                                       className="absolute inset-0 w-full h-full text-gray-200 stroke-2"

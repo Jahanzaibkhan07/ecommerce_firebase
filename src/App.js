@@ -11,6 +11,7 @@ import Home from "./screen/home";
 // import PrivateRoute from "./screen/auth/private";
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [size, setSize] = useState("");
   let User;
   User = localStorage.getItem("UserInfo");
   // const [firebaseUser, setFirebaseUser] = useState(User);
@@ -36,6 +37,9 @@ const App = () => {
     } else {
       setCartItems([...cartItems, { ...product, qty: 1 }]);
     }
+  };
+  const onClickSize = (name) => {
+    setSize(name);
   };
   const onRemove = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
@@ -73,13 +77,14 @@ const App = () => {
             <Dashboard />
           </Route>
           <Route exact={false} path="/detail">
-            <Detail onAdd={onAdd} user={User} />
+            <Detail onAdd={onAdd} user={User} sizeName={onClickSize} />
           </Route>
           <Route exact={false} path={"/cartScreen"}>
             <CartScreen
               cartItems={cartItems}
               onAdd={onAdd}
               onRemove={onRemove}
+              size={size}
             />
           </Route>
         </Switch>

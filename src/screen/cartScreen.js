@@ -5,7 +5,7 @@ import CardWrapper from "../components/CardWrapper";
 
 export default function CartScreen(props) {
   const [open, setOpen] = useState(true);
-  const { cartItems, onAdd, onRemove } = props;
+  const { cartItems, onAdd, onRemove, size } = props;
   const itemsPrice = cartItems.reduce(
     (a, c) => a + (c.price - (c.price * c.discount) / 100) * c.qty,
     0
@@ -54,7 +54,11 @@ export default function CartScreen(props) {
                               <div className="flex justify-between text-base font-medium text-gray-900">
                                 <h3>
                                   <a>{product.title}</a>
+                                  <p className="text-gray-500 text-sm ">
+                                    Size {size}
+                                  </p>
                                 </h3>
+
                                 {product.discount !== "" ? (
                                   <div className="flex flex-col">
                                     <p className=" text-sm font-medium text-gray-900">
